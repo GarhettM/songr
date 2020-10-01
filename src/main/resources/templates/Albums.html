@@ -16,11 +16,15 @@
     <br>
 
     <form action="/albums" method="POST">
-        <input type="text" name="title">
-        <input type="text" name="artist">
-        <input type="number" name="songCount">
-        <input type="number" name="length">
-        <input type="text" name="imgUrl">
+        Album Title<input type="text" name="title">
+        Album Artist<input type="text" name="artist">
+        Album Song Count<input type="number" name="songCount">
+        Album Length<input type="number" name="length">
+        Album Image<input type="text" name="imgUrl">
+        <br>
+        Song Title<input type="text" name="songTitle">
+        Song Track Number<input type="number" name="trackNumber">
+        Song Length<input type="number" name="songLength">
         <input type="submit">
     </form>
 
@@ -28,19 +32,37 @@
     <br>
     <table>
         <tr>
-            <th>Title</th>
+            <th>Album Title</th>
             <th>Artist</th>
             <th>Song Count</th>
             <th>Album Length</th>
             <th>Album Cover</th>
+            <th>Song Title</th>
+            <th>Track Number</th>
+            <th>Track Length</th>
+
         </tr>
 
-        <tr th:each="album : ${albumMod}">
-            <td th:text="${album.title}"></td>
-            <td th:text="${album.artist}"></td>
-            <td th:text="${album.songCount}"></td>
-            <td th:text="${album.length}"></td>
-            <td><img th:src="${album.imgUrl}" alt="Song Album Picture" src=""></td>
+        <tr th:if="${albums}" th:each="album : ${albums}">
+            <table>
+                <tr>
+                    <td th:text="${album.title}"></td>
+                    <td th:text="${album.artist}"></td>
+                    <td th:text="${album.songCount}"></td>
+                    <td th:text="${album.length}"></td>
+                    <td><img th:src="${album.imgUrl}" alt="Song Album Picture" src=""></td>
+                </tr>
+                <tr th:if="${albums.song}" th:each="song : ${albums.song}">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td th:text="${album.song.songTitle}"></td>
+                    <td th:text="${album.song.trackNumber}"></td>
+                    <td th:text="${album.song.songLength}"></td>
+                </tr>
+            </table>
         </tr>
     </table>
 
